@@ -16,7 +16,7 @@ spec:
       author:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
-      messageTemplate: "Update hello-app image to {{range .Updated.Images}}{{.Tag}}{{end}}"
+      messageTemplate: "Update hello-app image to {{range .Changed.Changes}}{{.NewValue}}{{end}}"
     push:
       branch: main
   update:
