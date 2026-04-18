@@ -1,0 +1,24 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: hello-app-automation
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: hello-infra
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: "Update hello-app image to {{range .Updated.Images}}{{.Tag}}{{end}}"
+    push:
+      branch: main
+  update:
+    path: ./k8s/flux/hello-app
+    strategy: Setters
