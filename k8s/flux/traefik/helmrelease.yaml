@@ -18,7 +18,7 @@ spec:
       type: NodePort
     ports:
       web:
-        nodePort: 80
+        nodePort: 30080
     ingressClass:
       enabled: true
       isDefaultClass: true
