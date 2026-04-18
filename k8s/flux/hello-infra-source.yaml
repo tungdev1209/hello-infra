@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/tungdev1209/hello-infra
+  url: ssh://git@github.com/tungdev1209/hello-infra
   ref:
     branch: main
   secretRef:
