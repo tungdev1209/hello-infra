@@ -17,7 +17,7 @@ spec:
         - name: ecr-pull-secret
       containers:
         - name: hello-app
-          image: 136583899808.dkr.ecr.us-east-1.amazonaws.com/hello-app:v1.0.5 # {"$imagepolicy": "flux-system:hello-app-policy"}
+          image: 136583899808.dkr.ecr.us-east-1.amazonaws.com/hello-app:v1.0.6 # {"$imagepolicy": "flux-system:hello-app-policy"}
           ports:
             - containerPort: 8080
 ---
