@@ -11,6 +11,17 @@ spec:
   secretRef:
     name: hello-infra-token
 ---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: hello-app
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/tungdev1209/hello-app
+  ref:
+    branch: main
+---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -27,12 +38,32 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: hello-app
+  name: hello-app-config
   namespace: flux-system
 spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
+    name: hello-app
+  path: ./k8s
+  prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: hello-app
+  namespace: flux-system
+spec:
+  interval: 1m
+  dependsOn:
+    - name: hello-app-config
+  sourceRef:
+    kind: GitRepository
     name: hello-infra
   path: ./k8s/flux/hello-app
   prune: true
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: hello-app-config
+        optional: true
