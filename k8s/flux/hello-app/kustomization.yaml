@@ -4,6 +4,8 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - ingress.yaml
+  - middleware.yaml
+  - clusterissuer.yaml
   - image-repository.yaml
   - image-policy.yaml
   - image-update-automation.yaml

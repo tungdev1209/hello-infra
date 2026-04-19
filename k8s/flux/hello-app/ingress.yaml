@@ -3,8 +3,16 @@ kind: Ingress
 metadata:
   name: hello-app
   namespace: hello-app
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: hello-app-redirect-https@kubernetescrd
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - hello.teleprintor.com
+      secretName: hello-app-tls
   rules:
     - host: hello.teleprintor.com
       http:
