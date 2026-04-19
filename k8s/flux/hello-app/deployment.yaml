@@ -13,8 +13,6 @@ spec:
       labels:
         app: hello-app
     spec:
-      imagePullSecrets:
-        - name: ecr-pull-secret
       containers:
         - name: hello-app
           image: 136583899808.dkr.ecr.us-east-1.amazonaws.com/hello-app:v1.0.0 # {"$imagepolicy": "flux-system:hello-app-policy"}
