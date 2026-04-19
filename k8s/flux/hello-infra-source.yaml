@@ -38,6 +38,19 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: clusterissuer
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: hello-infra
+  path: ./k8s/flux
+  prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: hello-app-config
   namespace: flux-system
 spec:
@@ -60,7 +73,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: hello-infra
-  path: ./k8s/flux/hello-app
+  path: ./k8s/flux/services/hello-app
   prune: true
   postBuild:
     substituteFrom:

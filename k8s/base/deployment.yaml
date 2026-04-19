@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-app
-  namespace: hello-app
+  name: ${SERVICE_NAME}
+  namespace: ${SERVICE_NAME}
 spec:
   replicas: ${REPLICAS:=1}
   selector:
     matchLabels:
-      app: hello-app
+      app: ${SERVICE_NAME}
   template:
     metadata:
       labels:
-        app: hello-app
+        app: ${SERVICE_NAME}
     spec:
       containers:
-        - name: hello-app
-          image: 136583899808.dkr.ecr.us-east-1.amazonaws.com/hello-app:v1.0.6 # {"$imagepolicy": "flux-system:hello-app-policy"}
+        - name: ${SERVICE_NAME}
+          image: ${SERVICE_IMAGE} # {"$imagepolicy": "flux-system:${SERVICE_NAME}-policy"}
           ports:
-            - containerPort: 8080
+            - containerPort: ${SERVICE_PORT:=8080}
           resources:
             requests:
               cpu: ${CPU_REQUEST:=100m}
@@ -29,11 +29,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-app
-  namespace: hello-app
+  name: ${SERVICE_NAME}
+  namespace: ${SERVICE_NAME}
 spec:
   selector:
-    app: hello-app
+    app: ${SERVICE_NAME}
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: ${SERVICE_PORT:=8080}
