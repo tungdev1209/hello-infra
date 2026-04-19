@@ -15,10 +15,7 @@ spec:
         namespace: traefik
   values:
     service:
-      type: NodePort
-    ports:
-      web:
-        nodePort: 30080
+      type: LoadBalancer
     ingressClass:
       enabled: true
       isDefaultClass: true
