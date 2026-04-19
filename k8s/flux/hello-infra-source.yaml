@@ -45,7 +45,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: hello-infra
-  path: ./k8s/flux
+  path: ./k8s/flux/clusterissuer
   prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
