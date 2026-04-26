@@ -4,6 +4,6 @@ metadata:
   name: hello-app
   namespace: flux-system
 spec:
-  image: 136583899808.dkr.ecr.us-east-1.amazonaws.com/hello-app
+  image: 136583899808.dkr.ecr.us-east-1.amazonaws.com/teleprinter-hello-app
   interval: 1m
   provider: aws
