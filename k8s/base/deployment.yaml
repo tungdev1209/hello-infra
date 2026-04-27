@@ -4,7 +4,7 @@ metadata:
   name: ${SERVICE_NAME}
   namespace: ${SERVICE_NAME}
 spec:
-  replicas: ${REPLICAS:=1}
+  replicas: ${REPLICAS:=2}
   selector:
     matchLabels:
       app: ${SERVICE_NAME}
@@ -13,6 +13,35 @@ spec:
       labels:
         app: ${SERVICE_NAME}
     spec:
+      tolerations:
+        - key: spot
+          operator: Equal
+          value: "true"
+          effect: NoSchedule
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/lifecycle
+                    operator: In
+                    values: ["spot"]
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: ${SERVICE_NAME}
+                topologyKey: kubernetes.io/hostname
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: ${SERVICE_NAME}
       containers:
         - name: ${SERVICE_NAME}
           image: ${SERVICE_IMAGE} # {"$imagepolicy": "flux-system:${SERVICE_NAME}-policy"}
@@ -37,3 +66,14 @@ spec:
   ports:
     - port: 80
       targetPort: ${SERVICE_PORT:=8080}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ${SERVICE_NAME}
+  namespace: ${SERVICE_NAME}
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: ${SERVICE_NAME}
