@@ -18,7 +18,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/tungdev1209/hello-app
+  url: ssh://git@github.com/tungdev1209/hello-app
   ref:
     branch: main
   secretRef:
