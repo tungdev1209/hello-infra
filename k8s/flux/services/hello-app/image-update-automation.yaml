@@ -7,7 +7,7 @@ spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
-    name: hello-app
+    name: hello-infra
   git:
     checkout:
       ref:
@@ -20,5 +20,5 @@ spec:
     push:
       branch: main
   update:
-    path: ./k8s
+    path: ./k8s/flux/services/hello-app
     strategy: Setters
