@@ -6,7 +6,7 @@ metadata:
 data:
   SERVICE_NAME: hello-app
   SERVICE_HOST: hello.teleprintor.com
-  SERVICE_IMAGE: 136583899808.dkr.ecr.us-east-1.amazonaws.com/teleprinter-hello-app:v1.0.9 # {"$imagepolicy": "flux-system:hello-app-policy"}
+  SERVICE_IMAGE: 136583899808.dkr.ecr.us-east-1.amazonaws.com/teleprinter-hello-app:v1.0.8 # {"$imagepolicy": "flux-system:hello-app-policy"}
   SERVICE_PORT: "8080"
   REPLICAS: "2"
   CPU_REQUEST: "100m"
