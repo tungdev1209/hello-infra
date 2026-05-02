@@ -4,4 +4,4 @@ metadata:
   name: hello-app-image-config
   namespace: flux-system
 data:
-  SERVICE_IMAGE: 136583899808.dkr.ecr.us-east-1.amazonaws.com/teleprinter-hello-app:v1.0.10 # {"$imagepolicy": "flux-system:hello-app-policy"}
+  SERVICE_IMAGE: 136583899808.dkr.ecr.us-east-1.amazonaws.com/teleprinter-hello-app:v1.0.11 # {"$imagepolicy": "flux-system:hello-app-policy"}
